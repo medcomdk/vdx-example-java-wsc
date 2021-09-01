@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+   service:
+     image: kvalitetsit/vdx-example-java-wsc:latest
+     environment:
+       - service.url=http://wsc:8080/videoapi
+     ports:
+       - "8080:8080"
+
+   documenatation-and-test:
+     image: kvalitetsit/vdx-example-java-wsc-documentation:latest
+     environment:
+       SERVER_URLS: '[{"url": "http://localhost:8080"}]'
+     ports:
+      - "80:8080"
+
+   wsc:
+     image: kvalitetsit/kitcaddy:1.2.8
+     command: -config /config/config.json
+     volumes:
+       - ../../../client.crt:/config/client.crt
+       - ../../../client.key:/config/client.key
+       - ../../../sts.crt:/trust/sts.crt
+       - ./config.json:/config/config.json
+     ports:
+       - "8081:8080"
+
+   mongo:
+     image: mongo:4.4
