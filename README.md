@@ -1,24 +1,23 @@
 ![Build Status](https://github.com/medcomdk/vdx-example-java/workflows/CICD/badge.svg) ![Test Coverage](.github/badges/jacoco.svg)
-# vdx-example-java
+# vdx-example-java-wsc
 
-Simple example on how to call VideoAPI in Java without using WSC proxy. It is a simple Spring Boot application with a 
-single endpoint at v1/{uuid} where uuid is a meeting uuid in your organisation.
+Simple example on how to call VideoAPI in Java using WSC proxy. The WSC proxy is Kitcaddy (
+[https://github.com/KvalitetsIT/kitcaddy](https://github.com/KvalitetsIT/kitcaddy) and 
+[https://hub.docker.com/r/kvalitetsit/kitcaddy](https://hub.docker.com/r/kvalitetsit/kitcaddy))
 
 ## Getting started
 
-This is a working example, and you only need to create a JKS Keystore with a private key entry and a trusted certificate
-entry. 
+This is a working example, and you only need to copy in sts signing certificate and client private key and certificate.
 
-The private key entry is the key used to sign requests to the STS and for mTLS. The alias must be `client`. 
-It must be configured in the STS. 
+The private key is the key used to sign requests to the STS and for mTLS. The file must be named `client.key` and placed
+in the same folder as this file. The client must be configured in the STS.
 
-The trusted certificate entry must be the signing certificate from the STS. This certificate can be found at 
-[https://docs.vconf-stage.dk/sts/cert/sts.cer](https://docs.vconf-stage.dk/sts/cert/sts.cer). The keystore password 
-and private key password must be `Test1234`.
+The client certificate must be named `client.crt` and placed in the same folder as this file.
 
-The keystore must be named client.jks and located in the same folder as this file.
+The STS signing certificate must be named `sts.crt` and placed in the same folder as this file. The certificate can be 
+found at [https://docs.vconf-stage.dk/sts/cert/sts.cer](https://docs.vconf-stage.dk/sts/cert/sts.cer). 
 
-### Run example in docker
+### Run example 
 
 Run below command and open [http://localhost](http://localhost) in a browser, and you can call the service using
 Swagger UI. The command must be executed from the same folder as this file, and it is required that docker-compose is 
@@ -27,7 +26,3 @@ installed.
 ```shell
 docker-compose -f documentation/docker/compose/docker-compose.yml up
 ```
-
-### Run it in your IDE
-
-A test application can be found in the class TestApplication.  
