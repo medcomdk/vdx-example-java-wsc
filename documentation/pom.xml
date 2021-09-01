@@ -89,7 +89,7 @@
 				<configuration>
 					<images>
 						<image>
-							<name>kvalitetsit/vdx-example-java-documentation</name>
+							<name>kvalitetsit/vdx-example-java-wsc-documentation</name>
 							<build>
 								<tags>
 									<tag>dev</tag>
