@@ -34,3 +34,6 @@ target
 .settings/
 .classpath
 
+/client.crt
+/client.key
+/sts.crt
